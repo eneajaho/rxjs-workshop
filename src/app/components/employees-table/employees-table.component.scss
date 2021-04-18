@@ -1,0 +1,27 @@
+.full-width-table {
+  width: 100%;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 10px 0;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  margin-top: 5px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.badge {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+}
+
+
+tr:hover {
+  background: whitesmoke;
+}

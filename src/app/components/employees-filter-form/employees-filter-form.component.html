@@ -1,0 +1,55 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-card class="filter-form">
+    <mat-card-header>
+      <mat-card-title>Filter employees</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>ID</mat-label>
+            <input matInput placeholder="ID" type="number" formControlName="id" min="0">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="E.g. John" type="text" formControlName="firstName">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="E.g. Smith" type="text" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="E.g. test@test.com" type="text" formControlName="email">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Active</mat-label>
+            <mat-select placeholder="Active" formControlName="active">
+              <mat-option></mat-option>
+              <mat-option [value]="true">Active</mat-option>
+              <mat-option [value]="false">Not active</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" type="submit">Filter employees</button>
+          <button mat-button color="warn" type="button" (click)="form.reset(); onSubmit()">
+            Reset form
+          </button>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</form>
