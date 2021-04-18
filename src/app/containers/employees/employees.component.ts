@@ -18,7 +18,7 @@ export class EmployeesComponent {
   racing$ = this.load.asObservable().pipe(
     switchMap((value: any) => {
       if (value) {
-        if (value?.pageIndex) {
+        if (value?.pageSize) {
           // pagination
           return this.employeeService.loadEmployees(undefined, value);
         } else {
