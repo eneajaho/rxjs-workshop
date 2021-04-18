@@ -17,7 +17,7 @@ ng s -o
 ```
 Start fake backend
 ```bash
-start-db
+npm run start-db
 ```
 
 ## Todo
