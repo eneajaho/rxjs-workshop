@@ -12,7 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
 export class EmployeesTableComponent {
 
   @Input() data: Employee[] = [];
-  @Input() pagination: Pagination = { pageIndex: 0, pageSize: 10, totalCount: 1000 };
+  @Input() pagination: Pagination = { pageIndex: 0, pageSize: 10 };
 
   @Output() paginated = new EventEmitter<PageEvent>();
 
