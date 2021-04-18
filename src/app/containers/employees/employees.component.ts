@@ -17,15 +17,18 @@ export class EmployeesComponent implements OnInit {
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.employeeService.loadEmployees().subscribe();
+    this.employeeService.loadEmployees()
+      .pipe(take(1)).subscribe();
   }
 
   filterEmployees(filters: EmployeeFilter): void {
-    this.employeeService.loadEmployees(filters).pipe(take(1)).subscribe();
+    this.employeeService.loadEmployees(filters)
+      .pipe(take(1)).subscribe();
   }
 
   paginateEmployees({pageIndex, pageSize}: PageEvent): void {
-    this.employeeService.loadEmployees(undefined, { pageIndex, pageSize }).subscribe();
+    this.employeeService.loadEmployees(undefined, { pageIndex, pageSize })
+      .pipe(take(1)).subscribe();
   }
 
 }
