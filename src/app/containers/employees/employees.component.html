@@ -1,16 +1,18 @@
 <div class="p-3">
 
+  <ng-container *ngIf="racing$ | async"></ng-container>
+
   <ng-container *ngIf="vm$ | async as vm">
     <app-employees-filter-form
       [filters]="vm.filters"
-      (filtered)="filterEmployees($event)">
+      (filtered)="load.next($event)">
     </app-employees-filter-form>
 
     <app-employees-table
       *ngIf="vm.data.length > 0 && !vm.loading"
       [data]="vm.data"
       [pagination]="vm.pagination"
-      (paginated)="paginateEmployees($event)">
+      (paginated)="load.next($event)">
     </app-employees-table>
 
     <div *ngIf="vm.loading" class="center">

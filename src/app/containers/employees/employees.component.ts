@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
-import { PageEvent } from '@angular/material/paginator';
-import { EmployeeFilter } from '../../models/employee-filter';
-import { take } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-employees',
@@ -10,25 +9,29 @@ import { take } from 'rxjs/operators';
   styleUrls: [ './employees.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EmployeesComponent implements OnInit {
+export class EmployeesComponent {
 
   vm$ = this.employeeService.state$;
 
+  load = new BehaviorSubject<any>(undefined);
+
+  racing$ = this.load.asObservable().pipe(
+    switchMap((value: any) => {
+      if (value) {
+        if (value?.pageIndex) {
+          // pagination
+          return this.employeeService.loadEmployees(undefined, value);
+        } else {
+          // filters
+          return this.employeeService.loadEmployees(value);
+        }
+      } else {
+        // initial load
+        return this.employeeService.loadEmployees();
+      }
+    })
+  );
+
   constructor(private employeeService: EmployeeService) {}
-
-  ngOnInit(): void {
-    this.employeeService.loadEmployees()
-      .pipe(take(1)).subscribe();
-  }
-
-  filterEmployees(filters: EmployeeFilter): void {
-    this.employeeService.loadEmployees(filters)
-      .pipe(take(1)).subscribe();
-  }
-
-  paginateEmployees({pageIndex, pageSize}: PageEvent): void {
-    this.employeeService.loadEmployees(undefined, { pageIndex, pageSize })
-      .pipe(take(1)).subscribe();
-  }
 
 }
